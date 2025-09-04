@@ -6,6 +6,13 @@ import { sendError } from './errors.js';
 import { generate } from '../lib/qrcode_generator.js';
 import { renderPNG, renderSVG, renderASCII } from '../lib/qrcode_painter.js';
 
+// Vercel serverless entrypoint for QRCodeAPI
+export default function handler(req, res) {
+  if (req.method === 'POST') {
+    return generateHandler(req, res);
+  }
+  res.status(405).json({ error: 'Method Not Allowed' });
+}
 
 // Express route handler for /api/generate
 export function generateHandler(req, res) {
