@@ -1,0 +1,37 @@
+{
+  "name": "qrcodeapi",
+  "version": "0.0.2",
+  "description": "😒 Reinventing the wheel by making a QR Code Generator API from scratch because I hate myself :), Hosted using vercel and open to anyone.",
+  "keywords": [
+    "qrcode",
+    "qr-code",
+    "qrcode-generator",
+    "qrcode-api",
+    "qrcode-generator-api"
+  ],
+  "homepage": "https://github.com/raigon-pawa/QRCodeAPI#readme",
+  "bugs": {
+    "url": "https://github.com/raigon-pawa/QRCodeAPI/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raigon-pawa/QRCodeAPI.git"
+  },
+  "license": "MIT",
+  "author": "Raigon Pawa",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test:png": "node ./src/lib/tests/qr_png.js",
+    "test:svg": "node ./src/lib/tests/qr_svg.js",
+    "test:ascii": "node ./src/lib/tests/qr_ascii.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.8.11",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "pngjs": "^7.0.0"
+  }
+}
