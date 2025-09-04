@@ -22,19 +22,19 @@ export function generateHandler(req, res) {
     const matrix = generate(config.text, config);
     if (type === 'png') {
       const pngBuffer = renderPNG(matrix, { boxSize: 10, border: 4 });
-      res.set('Content-Type', 'image/png');
+  res.setHeader('Content-Type', 'image/png');
       res.send(pngBuffer);
     } else if (type === 'svg') {
       const svgString = renderSVG(matrix, { boxSize: 10, border: 4, color: config.color });
-      res.set('Content-Type', 'image/svg+xml');
+  res.setHeader('Content-Type', 'image/svg+xml');
       res.send(svgString);
     } else if (type === 'ascii') {
       const asciiString = renderASCII(matrix, { boxSize: 1, border: 2 });
-      res.set('Content-Type', 'text/plain');
+  res.setHeader('Content-Type', 'text/plain');
       res.send(asciiString);
     } else {
       // fallback: return matrix as JSON
-      res.set('Content-Type', 'application/json');
+  res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify(matrix));
     }
   } catch (err) {
