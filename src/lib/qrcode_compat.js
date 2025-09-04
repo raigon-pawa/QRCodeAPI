@@ -2,7 +2,7 @@
  * Combined compat layer for XML and PNG writer
  */
 
-import { DOMParser } from 'xmldom';
+import { DOMParser } from '@xmldom/xmldom';
 // Combined compat layer for XML and PNG writer
 export const ET = DOMParser;
 

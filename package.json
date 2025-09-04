@@ -1,6 +1,6 @@
 {
   "name": "qrcode-lib",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "😒 Reinventing the wheel by making a QR Code Generator API from scratch because I hate myself :), Hosted using vercel and open to anyone.",
   "keywords": [
     "qrcode",
@@ -27,7 +27,7 @@
     "test:ascii": "node ./src/lib/tests/qr_ascii.js"
   },
   "dependencies": {
-    "pngjs": "^7.0.0",
-    "xmldom": "^0.6.0"
+    "@xmldom/xmldom": "^0.8.11",
+    "pngjs": "^7.0.0"
   }
 }

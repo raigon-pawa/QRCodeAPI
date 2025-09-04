@@ -3,7 +3,6 @@
  */
 
 import * as Utils from './qrcode_utils.js';
-import * as Base from './qrcode_base.js';
 import * as Constants from './qrcode_constants.js';
 import { DataOverflowError } from './qrcode_exceptions.js';
 
