@@ -32,6 +32,7 @@ console.log(qr); // SVG string
 - `data` (string): The text to encode.
 - `options` (object):
 	- `format`: `'png' | 'svg' | 'ascii'` (default: `'svg'`)
+ 	- `version`: `1 - 40` (default: `auto`)
 	- `errorCorrectionLevel`: `'L' | 'M' | 'Q' | 'H'` (default: `'M'`)
 	- ...other options
 
