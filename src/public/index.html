@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>QRCodeAPI — Simple QR Code Generator API</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="QRCodeAPI is a simple, open-source QR Code Generator API. Generate PNG, SVG, ASCII, or JSON QR codes via a REST API. Easily deploy on Vercel." />
+  <meta property="og:title" content="QRCodeAPI — Simple QR Code Generator API" />
+  <meta property="og:description" content="Generate PNG, SVG, ASCII, or JSON QR codes via a simple REST API. Hosted on Vercel. Open-source." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>QRCodeAPI</span>
+        <span class="pill">MIT</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#api">API</a></li>
+          <li><a href="#examples">Examples</a></li>
+          <li><a href="#playground">Playground</a></li>
+          <li><a href="#deployment">Deploy</a></li>
+          <li><a href="https://github.com/raigon-pawa/QRCodeAPI" target="_blank" rel="noopener">GitHub ↗</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="badge">Open-source • No SDK • REST</span>
+        <h1 class="title">Generate QR codes with a single API call</h1>
+        <p class="subtitle">PNG, SVG, ASCII, or JSON. Free, simple, and deployable to Vercel in minutes.</p>
+        <div class="flex" style="margin-top:14px;">
+          <a class="btn" href="#playground">Try the API</a>
+          <a class="btn secondary" href="https://github.com/raigon-pawa/QRCodeAPI" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        <div class="flex" style="margin-top:16px;">
+          <div class="kpi">
+            <strong>Formats</strong>
+            <span class="muted">PNG • SVG • ASCII • JSON</span>
+          </div>
+          <div class="kpi">
+            <strong>Endpoint</strong>
+            <span class="muted">POST /api/generate</span>
+          </div>
+          <div class="kpi">
+            <strong>Hosted</strong>
+            <span class="muted">Vercel-ready</span>
+          </div>
+        </div>
+      </div>
+      <div class="card hero preview" aria-hidden="true">
+        <div class="preview-inner">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="260" height="260">
+            <rect width="128" height="128" rx="10" fill="#0b1020" stroke="#26304a" />
+            <rect x="10" y="10" width="30" height="30" rx="4" fill="#e5e7eb"/>
+            <rect x="88" y="10" width="30" height="30" rx="4" fill="#e5e7eb"/>
+            <rect x="10" y="88" width="30" height="30" rx="4" fill="#e5e7eb"/>
+            <rect x="46" y="46" width="12" height="12" fill="#e5e7eb"/>
+            <rect x="62" y="46" width="12" height="12" fill="#e5e7eb"/>
+            <rect x="78" y="46" width="12" height="12" fill="#e5e7eb"/>
+            <rect x="46" y="62" width="12" height="12" fill="#e5e7eb"/>
+            <rect x="62" y="62" width="12" height="12" fill="#e5e7eb"/>
+            <rect x="78" y="62" width="12" height="12" fill="#e5e7eb"/>
+            <rect x="46" y="78" width="12" height="12" fill="#e5e7eb"/>
+            <rect x="62" y="78" width="12" height="12" fill="#e5e7eb"/>
+            <rect x="78" y="78" width="12" height="12" fill="#e5e7eb"/>
+          </svg>
+        </div>
+        <div class="note">Live preview is available below in the Playground.</div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="card" style="padding:16px; margin-bottom:18px;">
+        <h2>Overview</h2>
+        <p>QRCodeAPI is a simple, open-source QR Code Generator API built from scratch. It supports generating QR codes in PNG, SVG, ASCII, and JSON formats.</p>
+        <ul>
+          <li>Generate QR codes via a REST API</li>
+          <li>Output formats: PNG, SVG, ASCII (terminal), JSON (matrix)</li>
+          <li>Public rate limiting</li>
+          <li>Easy to deploy on Vercel</li>
+        </ul>
+        <div class="callout">Note: PNG width/height are supported; colors apply to PNG and SVG.</div>
+      </div>
+      <div class="card" style="padding:16px;">
+        <h2>Quickstart</h2>
+        <div class="code">
+          <div class="code-header">
+            <span class="filename">bash</span>
+            <button class="copy" data-copy="qs-curl">Copy</button>
+          </div>
+          <div class="code-content">
+            <pre id="qs-curl"><code>curl -X POST https://&lt;your-app-url&gt;/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{"text":"Hello World","type":"png"}' --output qrcode.png</code></pre>
+          </div>
+        </div>
+        <div class="code" style="margin-top:12px;">
+          <div class="code-header">
+            <span class="filename">powershell</span>
+            <button class="copy" data-copy="qs-ps">Copy</button>
+          </div>
+          <div class="code-content">
+            <pre id="qs-ps"><code>Invoke-RestMethod -Uri "https://&lt;your-app-url&gt;/api/generate" -Method POST -ContentType "application/json" -Body '{"text":"Hello World","type":"svg"}' &gt; qrcode.svg</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="api">
+      <h2>API</h2>
+      <table class="api-table">
+        <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>POST</code></td><td><code>/api/generate</code></td><td>Create a QR code</td></tr>
+        </tbody>
+      </table>
+      <div class="grid cols-2" style="margin-top:14px;">
+        <div class="card" style="padding:16px;">
+          <h3 style="margin:0 0 8px;">Request Body</h3>
+          <div class="code">
+            <div class="code-header">
+              <span class="filename">JSON</span>
+            </div>
+            <div class="code-content">
+              <pre><code>{
+  "text": "Hello World",
+  "type": "png" // "svg" | "ascii" | "json"
+}</code></pre>
+            </div>
+          </div>
+          <p style="margin-top:10px;"><strong>Optional (PNG/SVG):</strong></p>
+          <ul>
+            <li><code>color</code> Foreground (default <code>#000</code>)</li>
+            <li><code>bgColor</code> Background (default <code>#fff</code>)</li>
+            <li><code>width</code>, <code>height</code> (PNG only)</li>
+          </ul>
+        </div>
+        <div class="card" style="padding:16px;">
+          <h3 style="margin:0 0 8px;">Examples</h3>
+          <div class="code">
+            <div class="code-header">
+              <span class="filename">bash</span>
+              <button class="copy" data-copy="ex-curl">Copy</button>
+            </div>
+            <div class="code-content">
+              <pre id="ex-curl"><code>curl -X POST https://&lt;api-url&gt;/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{"text":"Hello","type":"png"}' \
+  --output qrcode.png</code></pre>
+            </div>
+          </div>
+          <div class="code" style="margin-top:12px;">
+            <div class="code-header">
+              <span class="filename">powershell</span>
+              <button class="copy" data-copy="ex-ps">Copy</button>
+            </div>
+            <div class="code-content">
+              <pre id="ex-ps"><code>Invoke-RestMethod `
+  -Uri "https://&lt;api-url&gt;/api/generate" `
+  -Method POST `
+  -ContentType "application/json" `
+  -Body '{"text":"Hello","type":"svg"}'</code></pre>
+            </div>
+          </div>
+          <div class="note" style="margin-top:10px;">If calling from the browser on a different origin, ensure CORS is enabled on your deployment.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="examples">
+      <h2>Example QR Codes</h2>
+      <div class="grid cols-2">
+        <div class="card" style="padding:16px;">
+          <h3 style="margin:0 0 8px;">1) Website URL</h3>
+          <p class="muted">Encodes https://example.com</p>
+          <div class="code" style="margin-top:10px;">
+            <div class="code-header">
+              <span class="filename">powershell</span>
+              <button class="copy" data-copy="ex1-ps">Copy</button>
+            </div>
+            <div class="code-content">
+              <pre id="ex1-ps"><code>Invoke-RestMethod `
+  -Uri "https://&lt;api-url&gt;/api/generate" `
+  -Method POST `
+  -ContentType "application/json" `
+  -Body '{"text":"https://example.com","type":"png"}' `
+  -OutFile "example_com.png"</code></pre>
+            </div>
+          </div>
+          <div class="code" style="margin-top:10px;">
+            <div class="code-header">
+              <span class="filename">bash</span>
+              <button class="copy" data-copy="ex1-curl">Copy</button>
+            </div>
+            <div class="code-content">
+              <pre id="ex1-curl"><code>curl -X POST https://&lt;api-url&gt;/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{"text":"https://example.com","type":"png"}' \
+  --output example_com.png</code></pre>
+            </div>
+          </div>
+          <div class="flex" style="margin-top:10px;">
+            <button class="btn ghost" data-fill="example-url">Use in Playground</button>
+          </div>
+        </div>
+        <div class="card" style="padding:16px;">
+          <h3 style="margin:0 0 8px;">2) WiFi QR Code</h3>
+          <p class="muted">Format your text as: <code>WIFI:T:WPA;S:MyNetwork;P:MyPassword;;</code></p>
+          <div class="code" style="margin-top:10px;">
+            <div class="code-header">
+              <span class="filename">powershell</span>
+              <button class="copy" data-copy="ex2-ps">Copy</button>
+            </div>
+            <div class="code-content">
+              <pre id="ex2-ps"><code>Invoke-RestMethod `
+  -Uri "https://&lt;api-url&gt;/api/generate" `
+  -Method POST `
+  -ContentType "application/json" `
+  -Body '{"text":"WIFI:T:WPA;S:MyNet;P:MyPass;;","type":"svg"}' `
+  > wifi_qr.svg</code></pre>
+            </div>
+          </div>
+          <div class="code" style="margin-top:10px;">
+            <div class="code-header">
+              <span class="filename">bash</span>
+              <button class="copy" data-copy="ex2-curl">Copy</button>
+            </div>
+            <div class="code-content">
+              <pre id="ex2-curl"><code>curl -X POST https://&lt;api-url&gt;/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{"text":"WIFI:T:WPA;S:MyNet;P:MyPass;;","type":"png"}' \
+  --output wifi_qr.png</code></pre>
+            </div>
+          </div>
+          <div class="flex" style="margin-top:10px;">
+            <button class="btn ghost" data-fill="example-wifi">Use in Playground</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="playground">
+      <h2>Playground</h2>
+      <p class="muted" style="margin-bottom:12px;">Test the API directly from your browser.</p>
+      <div class="card" style="padding:16px;">
+        <form id="play-form" class="form" onsubmit="return false;">
+          <div class="row">
+            <div class="field">
+              <label for="base-url">Base URL</label>
+              <input id="base-url" type="text" placeholder="https://your-app-url" />
+              <div class="note">Defaults to current origin. Append <code>/api/generate</code> automatically.</div>
+            </div>
+            <div class="field">
+              <label for="type">Type</label>
+              <select id="type">
+                <option value="png">png</option>
+                <option value="svg">svg</option>
+                <option value="ascii">ascii</option>
+                <option value="json">json</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="text">Text</label>
+            <textarea id="text" placeholder="Hello World"></textarea>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="color">Foreground color (PNG/SVG)</label>
+              <input id="color" type="color" value="#000000" />
+            </div>
+            <div class="field">
+              <label for="bgColor">Background color (PNG/SVG)</label>
+              <input id="bgColor" type="color" value="#ffffff" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="width">Width (PNG)</label>
+              <input id="width" type="number" min="16" step="1" placeholder="e.g. 512" />
+            </div>
+            <div class="field">
+              <label for="height">Height (PNG)</label>
+              <input id="height" type="number" min="16" step="1" placeholder="e.g. 512" />
+            </div>
+          </div>
+          <div class="flex" style="margin-top:8px;">
+            <button id="btn-generate" class="btn">Generate</button>
+            <button id="btn-reset" class="btn secondary" type="button">Reset</button>
+          </div>
+        </form>
+        <div class="grid cols-2" style="margin-top:16px;">
+          <div class="result">
+            <div class="muted">Result</div>
+            <div id="result-thumb" class="thumb">Fill the form and hit Generate.</div>
+            <div class="flex">
+              <a id="download-link" class="btn secondary hidden" download>Download</a>
+              <button id="copy-result" class="btn secondary hidden" type="button">Copy result</button>
+              <span id="status" class="note"></span>
+            </div>
+          </div>
+          <div class="result">
+            <div class="muted">Equivalent request</div>
+            <div class="code">
+              <div class="code-header">
+                <span class="filename">bash</span>
+                <button class="copy" data-copy="curl-preview">Copy</button>
+              </div>
+              <div class="code-content">
+                <pre id="curl-preview"><code>curl -X POST &lt;base-url&gt;/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{"text":"Hello World","type":"png"}' \
+  --output qrcode.png</code></pre>
+              </div>
+            </div>
+            <div class="code" style="margin-top:10px;">
+              <div class="code-header">
+                <span class="filename">powershell</span>
+                <button class="copy" data-copy="ps-preview">Copy</button>
+              </div>
+              <div class="code-content">
+                <pre id="ps-preview"><code>Invoke-RestMethod `
+  -Uri "&lt;base-url&gt;/api/generate" `
+  -Method POST `
+  -ContentType "application/json" `
+  -Body '{"text":"Hello World","type":"png"}' `
+  -OutFile "qrcode.png"</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="note" style="margin-top:10px;">Rate limiting may apply on public deployments.</div>
+      </div>
+    </section>
+
+    <section id="deployment">
+      <h2>Deployment</h2>
+      <div class="grid cols-2">
+        <div class="card" style="padding:16px;">
+          <ol style="margin:0 0 10px 18px;">
+            <li>Clone the repo: <code>git clone https://github.com/raigon-pawa/QRCodeAPI.git</code></li>
+            <li>Install dependencies: <code>npm install</code></li>
+            <li>Deploy to Vercel:
+              <ul>
+                <li>Import the repo in Vercel</li>
+                <li>Vercel will auto-detect the <code>/api/generate</code> endpoint</li>
+              </ul>
+            </li>
+          </ol>
+          <p class="note">Local dev: <code>npm start</code> then call <code>http://localhost:3000/api/generate</code></p>
+        </div>
+        <div class="card" style="padding:16px;">
+          <h3 style="margin:0 0 8px;">License</h3>
+          <p class="muted">MIT — Use it freely in commercial or personal projects. Attribution appreciated.</p>
+          <div style="margin-top:12px;">
+            <a class="btn secondary" href="https://github.com/raigon-pawa/QRCodeAPI" target="_blank" rel="noopener">Star on GitHub ⭐</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="flex">
+        <span>© <span id="year"></span> QRCodeAPI</span>
+        <span>•</span>
+        <span>Built for Vercel • Open-source MIT</span>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

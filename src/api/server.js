@@ -1,11 +1,24 @@
 import express from 'express';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
+import path from 'path';
+
+import { fileURLToPath } from 'url';
 import { generateHandler } from './generate.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, '../public')));
+
+// Home page route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 // Rate limiting: 100 requests per 15 minutes per IP
 const limiter = rateLimit({
