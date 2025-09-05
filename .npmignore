@@ -1,0 +1,18 @@
+# Git files
+.git
+.github
+.gitignore
+
+# Test files (unless you want to include them)
+src/lib/tests/hello_world.svg
+src/lib/tests/hello_world.png
+
+# Editor files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db

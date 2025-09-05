@@ -1,5 +1,5 @@
 {
-  "name": "qrcode-lib",
+  "name": "qrcodeapi",
   "version": "0.0.3",
   "description": "😒 Reinventing the wheel by making a QR Code Generator API from scratch because I hate myself :), Hosted using vercel and open to anyone.",
   "keywords": [
@@ -21,10 +21,16 @@
   "author": "Raigon Pawa",
   "type": "module",
   "main": "src/index.js",
+  "files": [
+    "src/**/*.js",
+    "src/**/*.json"
+  ],
   "scripts": {
     "test:png": "node ./src/lib/tests/qr_png.js",
     "test:svg": "node ./src/lib/tests/qr_svg.js",
-    "test:ascii": "node ./src/lib/tests/qr_ascii.js"
+    "test:ascii": "node ./src/lib/tests/qr_ascii.js",
+    "prepublishOnly": "npm test",
+    "test": "npm run test:svg && npm run test:png && npm run test:ascii"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.8.11",
