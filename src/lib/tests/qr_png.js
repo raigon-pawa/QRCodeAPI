@@ -5,9 +5,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { generate } from '../qrcode_generator.js';
 import { renderPNG } from '../qrcode_painter.js';
+import { version } from 'os';
 
 function main() {
-  const data = 'Hello World';
+  const data = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elit libero, pellentesque eget rhoncus eu, maximus sit amet mauris. Nam diam elit, varius id scelerisque at, facilisis non turpis. Vestibulum sit amet nunc ut eros fermentum iaculis id fringilla diam. Sed dapibus gravida consequat. Aliquam sit amet finibus tortor. Mauris.';
   const options = { boxSize: 10, border: 4 };
   console.log(`Generating QR code for: ${data}`);
   const modules = generate(data, options);

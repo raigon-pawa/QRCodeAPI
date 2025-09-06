@@ -3,7 +3,9 @@
 A list of planned improvements, bug fixes, and missing features for **QRCodeAPI**.
 
 ## Bugs / Fixes
-- [ ] Multi-line text support (currently doesn't work)
+- [x] Multi-line text support (currently doesn't work)
+- [x] Fix issue with version 7+ QR codes not scanning properly (missing version bits)
+- [ ] Larger QR's are slower to scan. Need to optimize rendering for large sizes.
 
 ## Enhancements
 - [ ] Add support for QR code styling (colors, logos, etc.)
