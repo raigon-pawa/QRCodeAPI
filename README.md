@@ -12,13 +12,13 @@ Reinventing the wheel by making a QR Code Generator API from scratch because I h
 ## Installation
 
 ```bash
-npm install qrcode-lib
+npm install qrcodeapi
 ```
 
 ## Usage
 
 ```js
-import { generateQRCode } from 'qrcode-lib';
+import { generateQRCode } from 'qrcodeapi';
 
 // Basic usage
 const qr = generateQRCode('Hello, world!', { format: 'svg' });
