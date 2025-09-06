@@ -3,7 +3,6 @@
  */
 
 import * as Utils from './qrcode_utils.js';
-import * as Base from './qrcode_base.js';
 import * as Constants from './qrcode_constants.js';
 import { DataOverflowError } from './qrcode_exceptions.js';
 
@@ -104,7 +103,27 @@ function generate(data, options = {}) {
   matrix.reserved[modulesCount - 8][8] = true;
 
   // Reserve version info areas (for v >= 7)
-  // ...not implemented for v < 7...
+  if (version >= 7) {
+    // Reserve version info areas
+    for (let i = 0; i < 6; i++) {
+      for (let j = 0; j < 3; j++) {
+        matrix.reserved[i][modulesCount - 11 + j] = true;
+        matrix.reserved[modulesCount - 11 + j][i] = true;
+      }
+    }
+    
+    // Add version info for v >= 7
+    const versionInfo = Utils.bchTypeNumber(version);
+    for (let i = 0; i < 18; i++) {
+      const bit = ((versionInfo >> i) & 1) === 1;
+      const row = Math.floor(i / 3);
+      const col = i % 3 + modulesCount - 11;
+      
+      // Place version info in both positions
+      matrix.set(col, row, bit, true); // bottom left
+      matrix.set(row, col, bit, true); // top right
+    }
+  }
 
   // Data mapping: zig-zag per QR spec, skipping reserved
   const dataBits = [];
